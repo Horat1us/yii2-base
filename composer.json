@@ -1,0 +1,31 @@
+{
+  "name": "horat1us/yii2-base",
+  "description": "Some extensions for Yii2 Framework",
+  "type": "library",
+  "require": {
+    "php": ">=7.0",
+    "yiisoft/yii2": "^2.0.11"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.2"
+  },
+  "keywords": [
+    "yii2",
+    "extension",
+    "widget",
+    "horat1us",
+    "base"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexander Letnikow",
+      "email": "reclamme@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Horat1us\\Yii2\\": "src"
+    }
+  }
+}
