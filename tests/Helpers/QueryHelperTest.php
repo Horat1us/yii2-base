@@ -10,7 +10,7 @@ class QueryHelperTest extends TestCase
 {
     public function testCoalesce()
     {
-        $expression = QueryHelper::coalesce('a','b');
+        $expression = QueryHelper::coalesce('a', 'b');
 
         $this->assertEquals('COALESCE((a), (b))', $expression);
     }
