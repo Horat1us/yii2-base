@@ -15,11 +15,11 @@ class QueryHelper
      * @param mixed[] $params
      * @return Expression
      */
-    protected static function sqlCall(string $sqlMethod, ...$params)
+    public static function sqlCall(string $sqlMethod, ...$params)
     {
         $expressions = implode(', ', array_map(function ($expression) {
             return "({$expression})";
-        }, $params));
+        }, $params[0] ?? []));
 
         $command = "{$sqlMethod}({$expressions})";
 
