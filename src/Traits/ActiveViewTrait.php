@@ -1,6 +1,6 @@
 <?php
 
-namespace Horat1us\Traits;
+namespace Horat1us\Yii\Traits;
 
 use yii\base\InvalidCallException;
 
