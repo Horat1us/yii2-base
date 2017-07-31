@@ -25,7 +25,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Horat1us\\Yii\\": "src"
+      "Horat1us\\Yii\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Horat1us\\Yii\\": "tests/"
     }
   }
 }

@@ -15,11 +15,11 @@ class QueryHelper
      * @param mixed[] $params
      * @return Expression
      */
-    public static function sqlCall(string $sqlMethod, ...$params)
+    public static function sqlCall(string $sqlMethod, ...$params) :Expression
     {
         $expressions = implode(', ', array_map(function ($expression) {
             return "({$expression})";
-        }, $params[0] ?? []));
+        }, $params));
 
         $command = "{$sqlMethod}({$expressions})";
 
@@ -32,8 +32,8 @@ class QueryHelper
      * @param array ...$params
      * @return Expression
      */
-    public static function coalesce(...$params)
+    public static function coalesce(...$params) :Expression
     {
-        return static::sqlCall('COALESCE', $params);
+        return static::sqlCall('COALESCE', ...$params);
     }
 }
