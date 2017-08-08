@@ -34,6 +34,11 @@ class ConstRangeValidator extends RangeValidator
      */
     public $targetClass;
 
+    /**
+     * @var callable
+     */
+    public $filter;
+
     public static $ranges = [];
 
     /**
@@ -67,6 +72,18 @@ class ConstRangeValidator extends RangeValidator
                 }
             }
         };
+    }
+
+    /**
+     * @param mixed $value
+     * @return array|null
+     */
+    protected function validateValue($value)
+    {
+        if (is_callable($this->filter)) {
+            $value = call_user_func($this->filter, $value);
+        }
+        return parent::validateValue($value);
     }
 
     /**
