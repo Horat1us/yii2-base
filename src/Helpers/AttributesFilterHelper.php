@@ -16,7 +16,7 @@ class AttributesFilterHelper
 {
     /**
      * @param array $attributes
-     * @param array $filters
+     * @param callable[] $filters
      * @return array
      */
     public static function apply(array $attributes, array $filters) :array
