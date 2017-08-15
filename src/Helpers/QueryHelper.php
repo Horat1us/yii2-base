@@ -19,7 +19,7 @@ class QueryHelper
     {
         $expressions = implode(', ', array_map(function ($expression) {
             return "({$expression})";
-        }, $params));
+        }, (array)$params));
 
         $command = "{$sqlMethod}({$expressions})";
 
