@@ -21,4 +21,13 @@ class QueryHelperTest extends TestCase
 
         $this->assertEquals('MIN((1), (2), (3))', $expression);
     }
+
+    public function testSingleParam()
+    {
+        $command = 'SELECT CURRENT_DATE';
+        $function = 'EXISTS';
+        $expression = QueryHelper::sqlCall($function, $command);
+
+        $this->assertEquals("{$function}(({$command}))", $expression);
+    }
 }
