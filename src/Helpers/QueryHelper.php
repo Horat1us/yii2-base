@@ -36,4 +36,27 @@ class QueryHelper
     {
         return static::sqlCall('COALESCE', ...$params);
     }
+
+    /**
+     * @param array $cases
+     * @param string|null $value
+     * @param string|null $else
+     * @return string
+     */
+    public static function caseWhen(array $cases, string $value = '', string $else = null): string
+    {
+        $command = "CASE {$value}";
+
+        foreach ($cases as $condition => $statement) {
+            $command .= " WHEN {$condition} THEN {$statement}";
+        }
+
+        if ($else) {
+            $command .= " ELSE {$else}";
+        }
+
+        $command .= " END";
+
+        return new Expression($command);
+    }
 }

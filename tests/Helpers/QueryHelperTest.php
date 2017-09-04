@@ -30,4 +30,49 @@ class QueryHelperTest extends TestCase
 
         $this->assertEquals("{$function}(({$command}))", $expression);
     }
+
+    public function testCaseWithoutElse()
+    {
+        $condition = 'date = 01.01.1970';
+        $statement = '1234';
+
+        $expression = QueryHelper::caseWhen([
+            $condition => $statement,
+        ]);
+
+        $this->assertEquals("CASE  WHEN {$condition} THEN {$statement} END", $expression);
+    }
+
+    public function testCaseWithElse()
+    {
+        $condition = 'true = false';
+        $statement = '1234';
+        $else = '4321';
+
+        $expression = QueryHelper::caseWhen(
+            [
+                $condition => $statement,
+            ],
+            '',
+            $else
+        );
+
+        $this->assertEquals("CASE  WHEN {$condition} THEN {$statement} ELSE {$else} END", $expression);
+    }
+
+    public function testCaseWithValue()
+    {
+        $value = 'variable';
+        $condition = "{$value} > 0";
+        $statement = '1';
+
+        $expression = QueryHelper::caseWhen(
+            [
+                $condition => $statement
+            ],
+            $value
+        );
+
+        $this->assertEquals("CASE {$value} WHEN {$condition} THEN {$statement} END", $expression);
+    }
 }
