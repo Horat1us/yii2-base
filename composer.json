@@ -4,7 +4,8 @@
   "type": "library",
   "require": {
     "php": ">=7.0",
-    "yiisoft/yii2": "^2.0.11"
+    "yiisoft/yii2": "^2.0.11",
+    "nesbot/carbon": "^1.22"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.2"
@@ -30,7 +31,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Horat1us\\Yii\\": "tests/"
+      "Horat1us\\Yii\\Tests\\": "tests/"
     }
   }
 }
