@@ -2,14 +2,14 @@
 
 namespace Horat1us\Yii\Tests\Behaviors;
 
-use Horat1us\Yii\Tests\ApplicationTest;
+use Horat1us\Yii\Tests\AbstractTestCase;
 use Horat1us\Yii\Tests\Mocks\NumberTestMock;
 
 /**
  * Class NumberBehaviorTest
  * @package Horat1us\Yii\Tests\Behaviors
  */
-class NumberBehaviorTest extends ApplicationTest
+class NumberBehaviorTestCase extends AbstractTestCase
 {
     /**
      * @return void
@@ -21,6 +21,6 @@ class NumberBehaviorTest extends ApplicationTest
             'phone' => $phone,
         ]);
         $model->validate();
-        $this->assertEquals(preg_replace('/\D/', '', $phone), $model->phone);
+        $this->assertEquals('380001234567', $model->phone);
     }
 }

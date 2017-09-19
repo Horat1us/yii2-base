@@ -3,14 +3,14 @@
 namespace Horat1us\Yii\Tests\Behaviors;
 
 use Carbon\Carbon;
-use Horat1us\Yii\Tests\ApplicationTest;
+use Horat1us\Yii\Tests\AbstractTestCase;
 use Horat1us\Yii\Tests\Mocks\TimestampTestMock;
 
 /**
  * Class FlexibleTimestampBehaviorTest
  * @package Horat1us\Yii\Tests\Behaviors
  */
-class FlexibleTimestampBehaviorTest extends ApplicationTest
+class FlexibleTimestampBehaviorTestCase extends AbstractTestCase
 {
     /**
      * @return void

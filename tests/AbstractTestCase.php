@@ -10,7 +10,7 @@ use yii\web\Application;
  * Class ApplicationTest
  * @package Horat1us\Yii\Tests
  */
-abstract class ApplicationTest extends TestCase
+abstract class AbstractTestCase extends TestCase
 {
     /**
      * Create new application instance if it doesn't exist.
