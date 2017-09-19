@@ -15,36 +15,16 @@ use yii\web\Application;
 class FlexibleTimestampBehaviorTest extends TestCase
 {
     /**
+     * Create new application instance if it doesn't exist.
      * @return void
      */
-    public function testCorrectMapping()
-    {
-        $this->mockApplication();
-        $date1 = Carbon::now()->subDay();
-        $date2 = Carbon::now()->subYear();
-
-        $model = new TimestampTestMock([
-            'timestamp' => $date1->timestamp,
-            'date' => $date2->toDateString(),
-        ]);
-        $model->validate();
-
-        $this->assertEquals($date1->toDateString(), $model->timestamp);
-        $this->assertEquals($date2->toDateString(), $model->date);
-
-        $this->destroyApplication();
-    }
-
-    /**
-     * @return Application
-     */
-    protected function mockApplication()
+    public function setUp()
     {
         if (isset(\Yii::$app)) {
-            return \Yii::$app;
+            return;
         }
         \Yii::$container = new Container();
-        return \Yii::createObject([
+        \Yii::createObject([
             'class' => Application::class,
             'id' => mt_rand(),
             'basePath' => __DIR__,
@@ -52,19 +32,32 @@ class FlexibleTimestampBehaviorTest extends TestCase
     }
 
     /**
-     *
+     * Clear created application.
+     * @return void
      */
-    protected function destroyApplication()
+    public function tearDown()
     {
-        if (\Yii::$app) {
-            if (\Yii::$app->has('session', true)) {
-                \Yii::$app->session->close();
-            }
-            if (\Yii::$app->has('db', true)) {
-                \Yii::$app->db->close();
-            }
-        }
         \Yii::$app = null;
         \Yii::$container = new Container();
+    }
+
+    /**
+     * @return void
+     */
+    public function testCorrectMapping()
+    {
+        $date1 = Carbon::now()->subDay();
+        $date2 = Carbon::now()->subYear();
+
+        $model = new TimestampTestMock([
+            'timestamp' => $date1->timestamp,
+            'date1' => $date2->format('d.m.Y'),
+            'date2' => $date2->format('Y-m-d'),
+        ]);
+        $model->validate();
+
+        $this->assertEquals($date1->format($model->format), $model->timestamp);
+        $this->assertEquals($date2->format($model->format), $model->date1);
+        $this->assertEquals($date2->format($model->format), $model->date2);
     }
 }

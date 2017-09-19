@@ -15,7 +15,13 @@ class TimestampTestMock extends Model
     public $timestamp;
 
     /** @var  string */
-    public $date;
+    public $date1;
+
+    /** @var  string */
+    public $date2;
+
+    /** @var string */
+    public $format = 'Y/m/d';
 
     /**
      * @return array
@@ -25,7 +31,8 @@ class TimestampTestMock extends Model
         return [
             'flexibleTimestamp' => [
                 'class' => FlexibleTimestampBehavior::class,
-                'attributes' => ['timestamp', 'date',],
+                'attributes' => ['timestamp', 'date1', 'date2',],
+                'format' => $this->format,
             ],
         ];
     }
@@ -36,7 +43,7 @@ class TimestampTestMock extends Model
     public function rules()
     {
         return [
-            [['timestamp', 'date',], 'date', 'format' => 'php:Y-m-d',],
+            [['timestamp', 'date1', 'date2',], 'date', 'format' => 'php:Y-m-d',],
         ];
     }
 }
