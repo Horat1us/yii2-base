@@ -85,7 +85,7 @@ class LoaderValidator extends Validator
         };
 
         if (!$closure->call($model, $query->one(), $this->attribute) instanceof $this->targetClass && $this->required) {
-            $this->addError($model, $attribute, '{attribute} is invalid.', [
+            $this->addError($model, $attribute, \Yii::t('yii', '{attribute} is invalid.'), [
                 'attribute' => $attribute,
             ]);
         }
