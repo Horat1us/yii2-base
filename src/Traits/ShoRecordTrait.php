@@ -23,6 +23,6 @@ trait ShoRecordTrait
 
         $tableAlias = preg_replace('/[^\w]/', '', $tableAlias);
 
-        return "\"$tableAlias\".\"$field\"";
+        return "{{%$tableAlias}}.$field";
     }
 }
