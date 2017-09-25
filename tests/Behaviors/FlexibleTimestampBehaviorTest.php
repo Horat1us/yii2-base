@@ -10,7 +10,7 @@ use Horat1us\Yii\Tests\Mocks\TimestampTestMock;
  * Class FlexibleTimestampBehaviorTest
  * @package Horat1us\Yii\Tests\Behaviors
  */
-class FlexibleTimestampBehaviorTestCase extends AbstractTestCase
+class FlexibleTimestampBehaviorTest extends AbstractTestCase
 {
     /**
      * @return void
