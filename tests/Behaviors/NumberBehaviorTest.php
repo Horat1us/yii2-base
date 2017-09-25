@@ -9,7 +9,7 @@ use Horat1us\Yii\Tests\Mocks\NumberTestMock;
  * Class NumberBehaviorTest
  * @package Horat1us\Yii\Tests\Behaviors
  */
-class NumberBehaviorTestCase extends AbstractTestCase
+class NumberBehaviorTest extends AbstractTestCase
 {
     /**
      * @return void
