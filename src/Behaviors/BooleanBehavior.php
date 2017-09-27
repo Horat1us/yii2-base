@@ -51,7 +51,7 @@ class BooleanBehavior extends Behavior
 
     /**
      * @param string|int|bool $value
-     * @return bool
+     * @return bool|mixed
      */
     protected function map($value) {
         if (is_numeric($value)) {
@@ -66,12 +66,16 @@ class BooleanBehavior extends Behavior
     }
 
     /**
-     * @param bool $value
-     * @return bool|int
+     * @param bool|mixed $value
+     * @return bool|int|mixed
      * @throws InvalidConfigException
      */
-    protected function makeReturnValue(bool $value)
+    protected function makeReturnValue($value)
     {
+        if (!is_bool($value)) {
+            return $value;
+        }
+
         if (!in_array($this->returnType, [static::RETURN_TYPE_BOOL, static::RETURN_TYPE_INT,])) {
             throw new InvalidConfigException("Invalid return type {$this->returnType}");
         }
