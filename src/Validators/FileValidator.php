@@ -91,7 +91,7 @@ class FileValidator extends \yii\validators\FileValidator
             return true;
         }
 
-        $this->addError($model, $attribute, $this->tooMany, ['limit' => $this->maxFiles]);
+        $this->addError($model, $attribute, $this->tooMany, ['limit' => $maxFiles]);
 
         return false;
     }
