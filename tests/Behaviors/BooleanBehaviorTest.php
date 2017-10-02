@@ -25,6 +25,10 @@ class BooleanBehaviorTest extends TestCase
         $model->intValue = 'true';
         $model->validate();
         $this->assertTrue($model->intValue === 1);
+
+        $model->intValue = [];
+        $model->validate();
+        $this->assertEquals([], $model->intValue);
     }
 
     public function testBool()
@@ -41,5 +45,9 @@ class BooleanBehaviorTest extends TestCase
         $model->boolValue = 'true';
         $model->validate();
         $this->assertTrue($model->boolValue);
+
+        $model->boolValue = [];
+        $model->validate();
+        $this->assertEquals([], $model->boolValue);
     }
 }
