@@ -80,12 +80,13 @@ class FileValidator extends \yii\validators\FileValidator
             return false;
         }
 
-        if (is_null($this->maxFiles)) {
-            return true;
-        }
         $maxFiles = is_callable($this->maxFiles)
             ? call_user_func($this->maxFiles, $model, $attribute)
             : $this->maxFiles;
+
+        if (is_null($maxFiles)) {
+            return true;
+        }
 
         if (count($files) <= $maxFiles) {
             return true;
