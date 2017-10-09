@@ -3,6 +3,8 @@
 
 namespace Horat1us\Yii\Database;
 
+use Horat1us\Yii\Interfaces\TransactionInterface;
+
 use yii\db\Connection;
 
 
@@ -10,7 +12,7 @@ use yii\db\Connection;
  * Class Transaction
  * @package Horat1us\Yii\Database
  */
-class Transaction
+class Transaction implements TransactionInterface
 {
     /** @var  Connection */
     protected $connection;
@@ -25,20 +27,20 @@ class Transaction
     }
 
     /**
-     * @param callable $closure
+     * @param callable $callable
      * @param array ...$args
      * @return mixed
      * @throws \Throwable
      */
-    public function call(callable $closure, ...$args)
+    public function call(callable $callable, ...$args)
     {
         if ($this->connection->transaction && $this->connection->transaction->isActive) {
-            return call_user_func_array($closure, $args);
+            return call_user_func_array($callable, $args);
         }
 
         $transaction = $this->connection->beginTransaction();
         try {
-            $result = call_user_func_array($closure, $args);
+            $result = call_user_func_array($callable, $args);
 
             $transaction->commit();
 
