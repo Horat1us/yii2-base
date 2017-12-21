@@ -8,6 +8,8 @@ use yii\db\ActiveRecord;
 /**
  * Class ShoRecordModelMock
  * @package Horat1us\Yii\Tests\Mocks
+ *
+ * @internal
  */
 class ShoRecordModelMock extends ActiveRecord
 {

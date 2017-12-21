@@ -8,6 +8,8 @@ use Horat1us\Yii\Tests\Mocks\NumberTestMock;
 /**
  * Class NumberBehaviorTest
  * @package Horat1us\Yii\Tests\Behaviors
+ *
+ * @internal
  */
 class NumberBehaviorTest extends AbstractTestCase
 {

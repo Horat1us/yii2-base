@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexander
- * Date: 11.08.17
- * Time: 13:09
- */
 
 namespace Horat1us\Yii\Tests\Helpers;
 
@@ -15,6 +9,8 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class AttributesFilterHelperTest
  * @package Horat1us\Yii\Tests\Helpers
+ *
+ * @internal
  */
 class AttributesFilterHelperTest extends TestCase
 {

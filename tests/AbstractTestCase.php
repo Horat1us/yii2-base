@@ -9,6 +9,8 @@ use yii\web\Application;
 /**
  * Class ApplicationTest
  * @package Horat1us\Yii\Tests
+ *
+ * @internal
  */
 abstract class AbstractTestCase extends TestCase
 {

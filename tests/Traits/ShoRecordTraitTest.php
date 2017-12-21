@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class ShoRecordTraitTest
  * @package Horat1us\Yii\Tests\Traits
+ *
+ * @internal
  */
 class ShoRecordTraitTest extends TestCase
 {

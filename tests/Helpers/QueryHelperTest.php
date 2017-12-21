@@ -6,6 +6,12 @@ use Horat1us\Yii\Helpers\QueryHelper;
 use PHPUnit\Framework\TestCase;
 use yii\db\Expression;
 
+/**
+ * Class QueryHelperTest
+ * @package Horat1us\Yii\Tests\Helpers
+ *
+ * @internal
+ */
 class QueryHelperTest extends TestCase
 {
     public function testCoalesce()

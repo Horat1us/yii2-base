@@ -8,6 +8,8 @@ use yii\base\Model;
 /**
  * Class NumberTestMock
  * @package Horat1us\Yii\Tests\Mocks
+ *
+ * @internal
  */
 class NumberTestMock extends Model
 {

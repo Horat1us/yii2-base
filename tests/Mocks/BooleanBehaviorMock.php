@@ -8,6 +8,8 @@ use yii\db\ActiveRecord;
 /**
  * Class BooleanBehaviorMock
  * @package Horat1us\Yii\Tests\Mocks
+ *
+ * @internal
  */
 class BooleanBehaviorMock extends ActiveRecord
 {

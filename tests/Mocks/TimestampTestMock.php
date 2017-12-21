@@ -8,6 +8,8 @@ use yii\base\Model;
 /**
  * Class TimestampTestMock
  * @package Horat1us\Yii\Tests\Mocks
+ *
+ * @internal
  */
 class TimestampTestMock extends Model
 {

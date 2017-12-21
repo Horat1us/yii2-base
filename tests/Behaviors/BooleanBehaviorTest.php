@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class BooleanBehaviorTest
  * @package Horat1us\Yii\Tests\Behaviors
+ *
+ * @internal
  */
 class BooleanBehaviorTest extends TestCase
 {
