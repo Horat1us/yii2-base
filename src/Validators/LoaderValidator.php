@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: horat1us
- * Date: 7/31/17
- * Time: 4:07 PM
- */
 
 namespace Horat1us\Yii\Validators;
 
+use Horat1us\Yii\Behaviors\LoaderBehavior;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\db\ActiveQuery;
@@ -16,6 +11,9 @@ use yii\validators\Validator;
 /**
  * Class LoaderValidator
  * @package common\validators
+ *
+ * @deprecated Use LoaderBehavior instead
+ * @see LoaderBehavior
  */
 class LoaderValidator extends Validator
 {
