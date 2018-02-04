@@ -80,7 +80,7 @@ class LoaderBehavior extends Behavior
      *
      * @var string
      */
-    public $attribute = 'dependency';
+    public $attribute;
 
     /**
      * Callable that receives record if it found
