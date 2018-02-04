@@ -1,10 +1,13 @@
 <?php
 
-
 namespace Horat1us\Yii\Helpers;
 
 use yii\helpers\ArrayHelper as YiiArrayHelper;
 
+/**
+ * Class ArrayHelper
+ * @package Horat1us\Yii\Helpers
+ */
 class ArrayHelper extends YiiArrayHelper
 {
     /**

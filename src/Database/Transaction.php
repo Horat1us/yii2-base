@@ -1,16 +1,17 @@
 <?php
 
-
 namespace Horat1us\Yii\Database;
 
 use Horat1us\Yii\Interfaces\TransactionInterface;
 
 use yii\db\Connection;
 
-
 /**
  * Class Transaction
  * @package Horat1us\Yii\Database
+ *
+ * @deprecated Use Connection::transaction() instead
+ * @see Connection::transaction()
  */
 class Transaction implements TransactionInterface
 {

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Horat1us\Yii\Traits;
-
 
 use yii\base\Model;
 use yii\db\ActiveRecord;
@@ -18,12 +16,6 @@ trait ModelExceptionTrait
     /** @var Model */
     protected $model;
 
-    /**
-     * ModelExceptionTrait constructor.
-     * @param Model $model
-     * @param int $code
-     * @param \Throwable $previous
-     */
     public function __construct(Model $model, int $code = 0, \Throwable $previous = null)
     {
         $message = get_class($model) . " validation errors";
@@ -32,22 +24,21 @@ trait ModelExceptionTrait
         $this->model = $model;
     }
 
-    /**
-     * @return Model
-     */
     public function getModel(): Model
     {
         return $this->model;
     }
 
-
     /**
      * @param Model $model
+     * @param array|null $attributeNames
+     * @param bool $cleanErrors
      * @return Model
+     * @throws static
      */
-    public static function validateOrThrow(Model $model): Model
+    public static function validateOrThrow(Model $model, array $attributeNames = null, bool $cleanErrors = true): Model
     {
-        if (!$model->validate()) {
+        if (!$model->validate($attributeNames, $cleanErrors)) {
             throw new static($model);
         }
         return $model;
@@ -55,11 +46,13 @@ trait ModelExceptionTrait
 
     /**
      * @param ActiveRecordInterface $record
+     * @param array|null $attributeNames
      * @return ActiveRecordInterface|ActiveRecord
+     * @throws static
      */
-    public static function saveOrThrow(ActiveRecordInterface $record): ActiveRecordInterface
+    public static function saveOrThrow(ActiveRecordInterface $record, array $attributeNames = null): ActiveRecordInterface
     {
-        if (!$record->save() && $record instanceof Model) {
+        if (!$record->save(true, $attributeNames) && $record instanceof Model) {
             throw new static($record);
         }
         return $record;

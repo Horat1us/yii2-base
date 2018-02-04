@@ -1,12 +1,10 @@
 <?php
 
-
 namespace Horat1us\Yii\Traits;
 
 use Horat1us\Yii\Helpers\TransactionHelper;
 use Horat1us\Yii\Interfaces\TransactionInterface;
 use yii\db\ActiveRecordInterface;
-
 
 /**
  * Trait EntityTrait

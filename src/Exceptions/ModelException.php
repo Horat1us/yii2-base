@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Horat1us\Yii\Exceptions;
 
 use Horat1us\Yii\Traits\ModelExceptionTrait;

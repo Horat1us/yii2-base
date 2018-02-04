@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexander
- * Date: 11.08.17
- * Time: 13:00
- */
 
 namespace Horat1us\Yii\Helpers;
 
