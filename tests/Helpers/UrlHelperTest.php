@@ -25,5 +25,14 @@ class UrlHelperTest extends AbstractTestCase
             'https://horatius.pro/abc/c?route=1&multiple%5B0%5D=2&action=undefined',
             $processedUrl
         );
+
+        $url = "//google.com";
+        $processedUrl = UrlHelper::append($url, [
+            'a' => 'b',
+        ]);
+        $this->assertEquals(
+            "http://google.com?a=b",
+            $processedUrl
+        );
     }
 }
