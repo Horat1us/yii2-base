@@ -3,7 +3,7 @@
   "description": "Some extensions for Yii2 Framework",
   "type": "library",
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.1",
     "yiisoft/yii2": "~2.0.13.1",
     "nesbot/carbon": "^1.22"
   },
@@ -32,6 +32,12 @@
   "autoload-dev": {
     "psr-4": {
       "Horat1us\\Yii\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "process-timeout": 1800,
+    "platform": {
+      "php": "7.1"
     }
   }
 }
