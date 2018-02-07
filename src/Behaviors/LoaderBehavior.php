@@ -131,6 +131,7 @@ class LoaderBehavior extends Behavior
 
         if (empty($id)) {
             $this->notFound($id);
+            return;
         }
 
         /** @var ActiveQuery $query */
@@ -146,6 +147,7 @@ class LoaderBehavior extends Behavior
         $record = $query->one();
         if (!$record instanceof $this->targetClass) {
             $this->notFound();
+            return;
         }
 
         if (is_callable($this->load)) {
@@ -166,6 +168,7 @@ class LoaderBehavior extends Behavior
     {
         if (is_callable($this->notFoundCallback)) {
             call_user_func($this->notFoundCallback, $this);
+            return;
         }
 
         throw new NotFoundHttpException($id ? "Resource {$id} not found" : "Resource id was not specified.");
