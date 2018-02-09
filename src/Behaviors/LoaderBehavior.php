@@ -167,7 +167,7 @@ class LoaderBehavior extends Behavior
     protected function notFound(int $id = null): void
     {
         if (is_callable($this->notFoundCallback)) {
-            call_user_func($this->notFoundCallback, $this);
+            call_user_func($this->notFoundCallback, $id);
             return;
         }
 
