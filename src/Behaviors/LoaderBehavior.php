@@ -96,6 +96,19 @@ class LoaderBehavior extends Behavior
      */
     public $load;
 
+    /**
+     * Callable that receives id and should find record or entity
+     *
+     * ```php
+     * $query = function(int $id): ?ActiveRecord {
+     *  return SomeRecord::find()->andWhere(['=', 'id', $id])->one();
+     * }
+     * ```
+     *
+     * @var
+     */
+    public $query;
+
     /** @var callable */
     public $notFoundCallback;
 
@@ -134,7 +147,39 @@ class LoaderBehavior extends Behavior
             return;
         }
 
-        /** @var ActiveQuery $query */
+        $object = $this->query($id);
+        if (!$object instanceof $this->targetClass) {
+            $this->notFound($id);
+            return;
+        }
+
+        $this->inject($object);
+    }
+
+    protected function inject(object $object): void
+    {
+        if (is_callable($this->load)) {
+            call_user_func($this->load, $object);
+            return;
+        }
+
+        $closure = function (object $value, string $attribute) {
+            $this->{$attribute} = $value;
+        };
+        $closure->call($this->owner, $object, $this->attribute);
+    }
+
+    /**
+     * @param int $id
+     * @return null|object
+     * @throws InvalidConfigException
+     */
+    protected function query(int $id): ?object
+    {
+        if (is_callable($this->query)) {
+            return call_user_func($this->query, $id);
+        }
+
         $query = call_user_func([$this->targetClass, 'find']);
         if (is_callable($this->queryFilter)) {
             $query = call_user_func($this->queryFilter, $query, $id);
@@ -144,27 +189,14 @@ class LoaderBehavior extends Behavior
             throw new InvalidConfigException("Query filter or target attribute have to be configured.");
         }
 
-        $record = $query->one();
-        if (!$record instanceof $this->targetClass) {
-            $this->notFound();
-            return;
-        }
-
-        if (is_callable($this->load)) {
-            call_user_func($this->load, $record);
-        } elseif (!empty($this->attribute)) {
-            $closure = function (ActiveRecord $value, string $attribute) {
-                $this->{$attribute} = $value;
-            };
-            $closure->call($this->owner, $record, $this->attribute);
-        }
+        return $query->one();
     }
 
     /**
-     * @param int $id
+     * @param mixed $id
      * @throws NotFoundHttpException
      */
-    protected function notFound(int $id = null): void
+    protected function notFound($id = null): void
     {
         if (is_callable($this->notFoundCallback)) {
             call_user_func($this->notFoundCallback, $id);
