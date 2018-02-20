@@ -31,4 +31,34 @@ class ArrayHelper extends YiiArrayHelper
         }
         return $return;
     }
+
+    public static function every(array $items, callable $condition): bool
+    {
+        // we need reflection to be able pass native `is_int` and `is_string` as condition
+        $reflection = new \ReflectionFunction($condition);
+        $hasTwoArguments = $reflection->getNumberOfParameters() === 2;
+        foreach ($items as $key => $item) {
+            $arguments = [$item];
+            $hasTwoArguments && $arguments[] = $key;
+            if (!call_user_func($condition, ...$arguments)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static function some(array $items, callable $condition): bool
+    {
+        // we need reflection to be able pass native `is_int` and `is_string` as condition
+        $reflection = new \ReflectionFunction($condition);
+        $hasTwoArguments = $reflection->getNumberOfParameters() === 2;
+        foreach ($items as $key => $item) {
+            $arguments = [$item];
+            $hasTwoArguments && $arguments[] = $key;
+            if (call_user_func($condition, ...$arguments)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
