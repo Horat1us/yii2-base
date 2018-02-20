@@ -170,11 +170,11 @@ class LoaderBehavior extends Behavior
     }
 
     /**
-     * @param int $id
+     * @param mixed $id
      * @return null|object
      * @throws InvalidConfigException
      */
-    protected function query(int $id): ?object
+    protected function query($id): ?object
     {
         if (is_callable($this->query)) {
             return call_user_func($this->query, $id);
