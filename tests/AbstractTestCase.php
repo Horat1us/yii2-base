@@ -39,5 +39,6 @@ abstract class AbstractTestCase extends TestCase
     {
         \Yii::$app = null;
         \Yii::$container = new Container();
+        $_FILES = [];
     }
 }
