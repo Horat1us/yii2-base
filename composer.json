@@ -4,7 +4,7 @@
   "type": "library",
   "require": {
     "php": ">=7.1",
-    "yiisoft/yii2": "~2.0.13.1",
+    "yiisoft/yii2": "^2.0.13.1",
     "nesbot/carbon": "^1.22"
   },
   "require-dev": {
