@@ -46,6 +46,9 @@ class FlexibleTimestampBehavior extends Behavior
                     '/^\d{2}\.\d{2}\.\d{4}$/' => function ($match) use (&$date) {
                         $date = Carbon::createFromFormat('d.m.Y', $match[0]);
                     },
+                    '/^\d{2}\.\d{2}\.\d{2}$/' => function ($match) use (&$date) {
+                        $date = Carbon::createFromFormat('d.m.y', $match[0]);
+                    },
                     '/^\d+$/' => function ($match) use (&$date) {
                         $date = Carbon::createFromTimestamp($match[0]);
                     }

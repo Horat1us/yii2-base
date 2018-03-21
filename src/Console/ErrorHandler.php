@@ -16,7 +16,7 @@ class ErrorHandler extends \yii\console\ErrorHandler
         if ($exception instanceof ModelExceptionInterface) {
             $message .= $this->formatMessage("Errors: ");
             foreach ($exception->getModel()->errors as $attribute => $errors) {
-                $message .= "\t.$attribute\n";
+                $message .= "\t$attribute\n";
                 foreach ($errors as $error) {
                     $message .= "\t\t" . $this->formatMessage($error) . "\n";
                 }
