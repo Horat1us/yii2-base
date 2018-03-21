@@ -2,6 +2,7 @@
 
 namespace Horat1us\Yii\Traits;
 
+use Horat1us\Yii\Interfaces\ModelExceptionInterface;
 use yii\base\Model;
 use yii\db\ActiveRecord;
 use yii\db\ActiveRecordInterface;
@@ -9,7 +10,11 @@ use yii\db\ActiveRecordInterface;
 /**
  * Class ModelExceptionTrait
  * @package Horat1us\Yii\Traits
+ *
+ * @see ModelExceptionInterface
  * @see \Exception
+ *
+ * You should use this trait and implement ModelExceptionInterface
  */
 trait ModelExceptionTrait
 {
@@ -34,7 +39,7 @@ trait ModelExceptionTrait
      * @param array|null $attributeNames
      * @param bool $cleanErrors
      * @return Model
-     * @throws static
+     * @throws ModelExceptionInterface
      */
     public static function validateOrThrow(Model $model, array $attributeNames = null, bool $cleanErrors = true): Model
     {
@@ -48,7 +53,7 @@ trait ModelExceptionTrait
      * @param ActiveRecordInterface $record
      * @param array|null $attributeNames
      * @return ActiveRecordInterface|ActiveRecord
-     * @throws static
+     * @throws ModelExceptionInterface
      */
     public static function saveOrThrow(ActiveRecordInterface $record, array $attributeNames = null): ActiveRecordInterface
     {
@@ -62,6 +67,7 @@ trait ModelExceptionTrait
      * @param string $attribute
      * @param string $error
      * @param Model $model
+     * @throws ModelExceptionInterface
      */
     public static function addAndThrow(string $attribute, string $error, Model $model)
     {
