@@ -1,6 +1,6 @@
 <?php
 
-namespace Horat1us\Yii\Behaviors;
+namespace Horat1us\Yii\Console;
 
 use Horat1us\Yii\Interfaces\ModelExceptionInterface;
 
