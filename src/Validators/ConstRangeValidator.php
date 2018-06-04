@@ -68,7 +68,7 @@ class ConstRangeValidator extends RangeValidator
             $cache[$class][$prefix] = [];
 
             foreach ($reflection->getConstants() as $name => $v) {
-                if (strpos($name, $prefix) === 0) {
+                if ($prefix === '' || strpos($name, $prefix) === 0) {
                     $cache[$class][$prefix][] = $v;
                 }
             }
