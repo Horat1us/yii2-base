@@ -4,8 +4,8 @@ namespace Horat1us\Yii\Tests\Behaviors;
 
 use Horat1us\Yii\Behaviors\OptionsRequestBehavior;
 use Horat1us\Yii\Tests\AbstractTestCase;
-use Horat1us\Yii\Tests\Mocks\ResponseMock;
 use yii\base\ExitException;
+use yii\web;
 
 /**
  * Class OptionsRequestBehaviorTest
@@ -13,30 +13,50 @@ use yii\base\ExitException;
  */
 class OptionsRequestBehaviorTest extends AbstractTestCase
 {
+    /** @var OptionsRequestBehavior */
+    protected $behavior;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->behavior = new OptionsRequestBehavior([
+            'request' => new class extends web\Request
+            {
+                public function setMethod(string $method): void
+                {
+                    $this->method = $method;
+                }
+            },
+            'response' => new class extends web\Response
+            {
+                public $triggered = false;
+
+                public function send(): void
+                {
+                    $this->triggered = true;
+                }
+            }
+        ]);
+    }
+
     /**
      * @expectedException \yii\base\ExitException
      */
     public function testExit(): void
     {
-        $_SERVER['REQUEST_METHOD'] = 'OPTIONS';
-        $response = new ResponseMock();
-
-        $behavior = new OptionsRequestBehavior([
-            'response' => $response
-        ]);
+        $this->behavior->request->method = 'OPTIONS';
         try {
-            $behavior->check();
+            $this->behavior->check();
         } catch (ExitException $exception) {
-            $this->assertTrue($response->triggered);
+            $this->assertTrue($this->behavior->response->triggered);
             throw $exception;
         }
     }
 
     public function testNotExit(): void
     {
-        $_SERVER['REQUEST_METHOD'] = 'GET';
-        $behavior = new OptionsRequestBehavior();
-        $behavior->check();
-        $this->assertTrue(true);
+        $this->behavior->request->method = 'GET';
+        $this->behavior->check();
+        $this->assertFalse($this->behavior->response->triggered);
     }
 }
