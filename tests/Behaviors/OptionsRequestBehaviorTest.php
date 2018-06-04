@@ -4,7 +4,8 @@ namespace Horat1us\Yii\Tests\Behaviors;
 
 use Horat1us\Yii\Behaviors\OptionsRequestBehavior;
 use Horat1us\Yii\Tests\AbstractTestCase;
-use yii\web;
+use Horat1us\Yii\Tests\Mocks\ResponseMock;
+use yii\base\ExitException;
 
 /**
  * Class OptionsRequestBehaviorTest
@@ -18,15 +19,17 @@ class OptionsRequestBehaviorTest extends AbstractTestCase
     public function testExit(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'OPTIONS';
+        $response = new ResponseMock();
+
         $behavior = new OptionsRequestBehavior([
-            'response' => new class extends web\Response
-            {
-                public function send(): void
-                {
-                }
-            }
+            'response' => $response
         ]);
-        $behavior->check();
+        try {
+            $behavior->check();
+        } catch (ExitException $exception) {
+            $this->assertTrue($response->triggered);
+            throw $exception;
+        }
     }
 
     public function testNotExit(): void
