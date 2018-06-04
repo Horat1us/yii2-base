@@ -4,7 +4,8 @@ namespace Horat1us\Yii\Behaviors;
 
 use yii\base\Behavior;
 use yii\base\ExitException;
-use yii\web\Controller;
+use yii\web;
+use yii\di;
 
 /**
  * Class OptionsRequestBehavior
@@ -12,17 +13,30 @@ use yii\web\Controller;
  */
 class OptionsRequestBehavior extends Behavior
 {
+    /** @var string|array|web\Request */
+    public $request = 'request';
+
+    /** @var string|array|web\Response */
+    public $response = 'response';
+
+    public function init()
+    {
+        parent::init();
+        $this->request = di\Instance::ensure($this->request,  web\Request::class);
+        $this->response = di\Instance::ensure($this->response,  web\Response::class);
+    }
+
     public function events()
     {
         return [
-            Controller::EVENT_BEFORE_ACTION => 'check',
+            web\Controller::EVENT_BEFORE_ACTION => 'check',
         ];
     }
 
     public function check(): void
     {
-        if (\Yii::$app->request->method === 'OPTIONS') {
-            \Yii::$app->response->send();
+        if ($this->request->method === 'OPTIONS') {
+            $this->response->send();
             throw new ExitException();
         }
     }
