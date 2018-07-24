@@ -18,6 +18,10 @@ trait BootstrapMigrations
             $application->controllerMap['migrate'] = [
                 'class' => console\controllers\MigrateController::class,
             ];
+        } elseif (is_string($application->controllerMap['migrate'])) {
+            $application->controllerMap['migrate'] = [
+                'class' => $application->controllerMap['migrate'],
+            ];
         }
         $application->controllerMap['migrate']['migrationNamespaces'][] = $migrationNamespace;
     }
