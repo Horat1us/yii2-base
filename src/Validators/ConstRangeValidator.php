@@ -38,6 +38,9 @@ class ConstRangeValidator extends RangeValidator
      */
     public $filter;
 
+    /** @var array */
+    public $except = [];
+
     public static $ranges = [];
 
     /**
@@ -60,19 +63,19 @@ class ConstRangeValidator extends RangeValidator
 
             $cache = ConstRangeValidator::$ranges[$class][$prefix] ?? null;
             if ($cache instanceof \Traversable) {
-                return $cache;
+                return $this->filterExceptValues($cache);
             }
 
             $reflection = new \ReflectionClass($class);
             $cache[$class][$prefix] = [];
 
             foreach ($reflection->getConstants() as $name => $v) {
-                if ($prefix === '' || strpos($name, $prefix) === 0) {
+                if ($prefix === '' || mb_strpos($name, $prefix) === 0) {
                     $cache[$class][$prefix][] = $v;
                 }
             }
 
-            return $cache[$class][$prefix];
+            return $this->filterExceptValues($cache[$class][$prefix]);
         };
     }
 
@@ -95,5 +98,16 @@ class ConstRangeValidator extends RangeValidator
     {
         parent::validateAttribute($model, $attribute);
         $this->range = $this->getClosure();
+    }
+
+    protected function filterExceptValues(\iterable $constants): \iterable
+    {
+        if (!$this->except) {
+            return $constants;
+        }
+
+        return array_filter($constants, function (string $constant): bool {
+            return !in_array($constant, $this->except);
+        });
     }
 }
