@@ -9,26 +9,25 @@
 
 namespace Horat1us\Yii\Validators;
 
-use yii\base\InvalidConfigException;
 use Yii;
-use yii\base\Model;
+use yii\base;
 use yii\helpers\ArrayHelper;
 use yii\validators\Validator;
 
+/**
+ * Class CompositeValidator
+ * @package Horat1us\Yii\Validators
+ */
 class CompositeValidator extends Validator
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     public $rules = [];
-    /**
-     * @var boolean
-     */
+
+    /** @var bool */
     public $allowMessageFromRule = true;
-    /**
-     * @var Validator[]
-     */
-    private $_validators = [];
+
+    /** @var Validator[] */
+    private $validators = [];
 
     /**
      * @inheritdoc
@@ -43,20 +42,21 @@ class CompositeValidator extends Validator
 
     /**
      * @param integer $index
-     * @param Model|null $model
+     * @param base\Model|null $model
      * @return Validator
+     * @throws base\InvalidConfigException
      */
     private function getValidator($index, $model = null)
     {
-        if (!isset($this->_validators[$index])) {
-            $this->_validators[$index] = $this->createEmbeddedValidator($this->rules[$index], $model);
+        if (!isset($this->validators[$index])) {
+            $this->validators[$index] = $this->createEmbeddedValidator($this->rules[$index], $model);
         }
-        return $this->_validators[$index];
+        return $this->validators[$index];
     }
 
     /**
      * @param array $rule
-     * @param Model|null $model
+     * @param base\Model|null $model
      * @throws \yii\base\InvalidConfigException
      * @return Validator validator instance
      */
@@ -66,16 +66,18 @@ class CompositeValidator extends Validator
             return $rule;
         } elseif (is_array($rule) && isset($rule[0]) && isset($rule[1])) {
             if (!is_object($model)) {
-                $model = new Model(); // mock up context model
+                $model = new base\Model(); // mock up context model
             }
             return Validator::createValidator($rule[1], $model, $this->attributes, array_slice($rule, 2));
         } else {
-            throw new InvalidConfigException('Invalid validation rule: a rule must be an array specifying validator type.');
+            throw new base\InvalidConfigException(
+                'Invalid validation rule: a rule must be an array specifying validator type.'
+            );
         }
     }
 
     /**
-     * @param Model $model
+     * @param base\Model $model
      * @param string $attribute
      * @param Validator $validator
      * @param array $originalErrors
@@ -89,7 +91,14 @@ class CompositeValidator extends Validator
             $items = ArrayHelper::getValue($value, $current[0]);
             if ($items) {
                 foreach ($items as $i => $item) {
-                    $this->validateInternal($model, $attribute, $validator, $originalErrors, $value, "{$current[0]}.{$i}{$current[1]}");
+                    $this->validateInternal(
+                        $model,
+                        $attribute,
+                        $validator,
+                        $originalErrors,
+                        $value,
+                        "{$current[0]}.{$i}{$current[1]}"
+                    );
                 }
             }
         } else {
@@ -118,6 +127,7 @@ class CompositeValidator extends Validator
 
     /**
      * @inheritdoc
+     * @throws base\InvalidConfigException
      */
     public function validateAttribute($model, $attribute)
     {
@@ -127,7 +137,14 @@ class CompositeValidator extends Validator
             $originalErrors = $model->getErrors($attribute);
             $targets = (array)$rule[0];
             foreach ($targets as $target) {
-                $this->validateInternal($model, $attribute, $validator, $originalErrors, $value, $target);
+                $this->validateInternal(
+                    $model,
+                    $attribute,
+                    $validator,
+                    $originalErrors,
+                    $value,
+                    $target
+                );
             }
             $model->$attribute = $value;
         }
@@ -135,6 +152,7 @@ class CompositeValidator extends Validator
 
     /**
      * @inheritdoc
+     * @throws base\InvalidConfigException
      */
     protected function validateValue($value)
     {
