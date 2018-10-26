@@ -3,7 +3,6 @@
 
 namespace Horat1us\Yii\Interfaces;
 
-
 /**
  * Interface TransactionInterface
  * @package Horat1us\Yii\Interfaces

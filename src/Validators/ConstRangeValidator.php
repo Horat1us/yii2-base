@@ -10,7 +10,6 @@ namespace Horat1us\Yii\Validators;
 
 use yii\validators\RangeValidator;
 
-
 /**
  * Class ConstRangeValidator
  * @package common\validators
@@ -101,13 +100,13 @@ class ConstRangeValidator extends RangeValidator
         $this->range = $this->getClosure();
     }
 
-    protected function filterExceptValues(\Traversable $constants): \Traversable
+    protected function filterExceptValues(\iterable $constants): \iterable
     {
         if (!$this->except) {
             return $constants;
         }
 
-        return array_filter($constants, function ($constant) {
+        return array_filter($constants, function (string $constant): bool {
             return !in_array($constant, $this->except);
         });
     }

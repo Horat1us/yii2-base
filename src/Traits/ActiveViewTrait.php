@@ -15,7 +15,7 @@ trait ActiveViewTrait
      * @param null $attributeNames
      * @see ActiveRecord::save()
      */
-    public function save($runValidation = true, $attributeNames = NULL)
+    public function save($runValidation = true, $attributeNames = null)
     {
         throw new InvalidCallException("ActiveView cannot be saved!");
     }
@@ -25,7 +25,7 @@ trait ActiveViewTrait
      * @param null $attributeNames
      * @see ActiveRecord::update()
      */
-    public function update($runValidation = true, $attributeNames = NULL)
+    public function update($runValidation = true, $attributeNames = null)
     {
         throw new InvalidCallException("ActiveView cannot be updated!");
     }

@@ -21,8 +21,8 @@ class OptionsRequestBehavior extends base\Behavior
     public function init(): void
     {
         parent::init();
-        $this->request = di\Instance::ensure($this->request,  web\Request::class);
-        $this->response = di\Instance::ensure($this->response,  web\Response::class);
+        $this->request = di\Instance::ensure($this->request, web\Request::class);
+        $this->response = di\Instance::ensure($this->response, web\Response::class);
     }
 
     public function events(): array

@@ -3,7 +3,6 @@
 
 namespace Horat1us\Yii\Tests\Helpers;
 
-
 use Horat1us\Yii\Helpers\ArrayHelper;
 use Horat1us\Yii\Tests\AbstractTestCase;
 

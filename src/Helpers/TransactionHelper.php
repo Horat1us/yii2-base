@@ -42,7 +42,7 @@ class TransactionHelper
      * @param array ...$args
      * @return array
      */
-    public static function forEach (callable $closure, array $array, ...$args)
+    public static function forEach(callable $closure, array $array, ...$args)
     {
         return array_map(
             function ($item) use ($closure, $args) {
