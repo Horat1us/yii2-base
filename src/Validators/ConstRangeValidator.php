@@ -10,7 +10,6 @@ namespace Horat1us\Yii\Validators;
 
 use yii\validators\RangeValidator;
 
-
 /**
  * Class ConstRangeValidator
  * @package common\validators

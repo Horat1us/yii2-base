@@ -44,5 +44,4 @@ class LoaderBehaviorTest extends AbstractTestCase
     {
         $this->owner->trigger(Model::EVENT_BEFORE_VALIDATE);
     }
-
 }

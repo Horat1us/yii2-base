@@ -16,7 +16,9 @@ class AttributesFilterHelper
     public static function apply(array $attributes, array $filters) :array
     {
         foreach ($filters as $attribute => $filter) {
-            if (!array_key_exists($attribute, $attributes)) continue;
+            if (!array_key_exists($attribute, $attributes)) {
+                continue;
+            }
 
             $attributes[$attribute] = $filter($attributes[$attribute]);
         }

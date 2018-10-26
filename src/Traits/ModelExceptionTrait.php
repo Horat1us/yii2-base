@@ -55,8 +55,10 @@ trait ModelExceptionTrait
      * @return ActiveRecordInterface|ActiveRecord
      * @throws ModelExceptionInterface
      */
-    public static function saveOrThrow(ActiveRecordInterface $record, array $attributeNames = null): ActiveRecordInterface
-    {
+    public static function saveOrThrow(
+        ActiveRecordInterface $record,
+        array $attributeNames = null
+    ): ActiveRecordInterface {
         if (!$record->save(true, $attributeNames) && $record instanceof Model) {
             throw new static($record);
         }
