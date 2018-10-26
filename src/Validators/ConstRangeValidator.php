@@ -39,6 +39,9 @@ class ConstRangeValidator extends RangeValidator
      */
     public $filter;
 
+    /** @var array */
+    public $except = [];
+
     public static $ranges = [];
 
     /**
@@ -68,7 +71,9 @@ class ConstRangeValidator extends RangeValidator
             $cache[$class][$prefix] = [];
 
             foreach ($reflection->getConstants() as $name => $v) {
-                if ($prefix === '' || strpos($name, $prefix) === 0) {
+                $isConstantExist = $prefix === '' || mb_strpos($name, $prefix) === 0;
+
+                if ($isConstantExist && !in_array($v, $this->except)) {
                     $cache[$class][$prefix][] = $v;
                 }
             }
