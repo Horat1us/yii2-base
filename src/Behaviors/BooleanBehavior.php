@@ -53,7 +53,8 @@ class BooleanBehavior extends Behavior
      * @param string|int|bool $value
      * @return bool|mixed
      */
-    protected function map($value) {
+    protected function map($value)
+    {
         if (is_numeric($value)) {
             return (bool)$value;
         }

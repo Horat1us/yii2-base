@@ -8,7 +8,6 @@
 
 namespace Horat1us\Yii\Validators;
 
-
 use yii\base\Model;
 use yii\validators\Validator;
 

@@ -18,7 +18,11 @@ class UrlHelper
 
         return function_exists('http_build_url')
             ? http_build_url($parts)
-            : ($parts['scheme'] ?? 'http') . '://' . ($parts['host'] ?? 'localhost') . ($parts['path'] ?? '') . '?' . $parts['query'];
-
+            : (
+                ($parts['scheme'] ?? 'http')
+                . '://' . ($parts['host'] ?? 'localhost')
+                . ($parts['path'] ?? '')
+                . '?' . $parts['query']
+            );
     }
 }
