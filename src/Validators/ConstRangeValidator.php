@@ -62,7 +62,7 @@ class ConstRangeValidator extends RangeValidator
             $class = $this->targetClass ?? get_class($model);
 
             $cache = ConstRangeValidator::$ranges[$class][$prefix] ?? null;
-            if ($cache instanceof \Traversable) {
+            if (is_array($cache)) {
                 return $this->filterExceptValues($cache);
             }
 
@@ -100,7 +100,7 @@ class ConstRangeValidator extends RangeValidator
         $this->range = $this->getClosure();
     }
 
-    protected function filterExceptValues(\iterable $constants): \iterable
+    protected function filterExceptValues(array $constants): array
     {
         if (!$this->except) {
             return $constants;
