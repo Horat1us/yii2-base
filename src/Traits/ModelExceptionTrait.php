@@ -23,7 +23,7 @@ trait ModelExceptionTrait
 
     public function __construct(Model $model, int $code = 0, \Throwable $previous = null)
     {
-        $message = get_class($model) . " validation errors";
+        $message = \get_class($model) . " validation errors";
         parent::__construct($message, $code, $previous);
 
         $this->model = $model;

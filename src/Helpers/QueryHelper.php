@@ -17,7 +17,7 @@ class QueryHelper
      */
     public static function sqlCall(string $sqlMethod, ...$params): Expression
     {
-        $expressions = implode(', ', array_map(function ($expression) {
+        $expressions = implode(', ', \array_map(function ($expression) {
             return "({$expression})";
         }, (array)$params));
 

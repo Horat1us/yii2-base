@@ -58,11 +58,11 @@ class ConstRangeValidator extends RangeValidator
     public function getClosure(): \Closure
     {
         return function ($model, $attribute) {
-            $prefix = $this->prefix ?? strtoupper($attribute) . '_';
-            $class = $this->targetClass ?? get_class($model);
+            $prefix = $this->prefix ?? \strtoupper($attribute) . '_';
+            $class = $this->targetClass ?? \get_class($model);
 
             $cache = ConstRangeValidator::$ranges[$class][$prefix] ?? null;
-            if (is_array($cache)) {
+            if (\is_array($cache)) {
                 return $this->filterExceptValues($cache);
             }
 
@@ -70,7 +70,7 @@ class ConstRangeValidator extends RangeValidator
             $cache[$class][$prefix] = [];
 
             foreach ($reflection->getConstants() as $name => $v) {
-                if ($prefix === '' || mb_strpos($name, $prefix) === 0) {
+                if ($prefix === '' || \mb_strpos($name, $prefix) === 0) {
                     $cache[$class][$prefix][] = $v;
                 }
             }
@@ -85,8 +85,8 @@ class ConstRangeValidator extends RangeValidator
      */
     protected function validateValue($value)
     {
-        if (is_callable($this->filter)) {
-            $value = call_user_func($this->filter, $value);
+        if (\is_callable($this->filter)) {
+            $value = \call_user_func($this->filter, $value);
         }
         return parent::validateValue($value);
     }
@@ -106,8 +106,8 @@ class ConstRangeValidator extends RangeValidator
             return $constants;
         }
 
-        return array_filter($constants, function (string $constant): bool {
-            return !in_array($constant, $this->except);
+        return \array_filter($constants, function (string $constant): bool {
+            return !\in_array($constant, $this->except);
         });
     }
 }

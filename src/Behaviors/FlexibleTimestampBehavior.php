@@ -38,7 +38,7 @@ class FlexibleTimestampBehavior extends Behavior
             $value = $this->owner->{$attribute};
 
             $date = null;
-            preg_replace_callback_array(
+            \preg_replace_callback_array(
                 [
                     '/^\d{4}\-\d{2}\-\d{2}$/' => function ($match) use (&$date) {
                         $date = Carbon::createFromFormat('Y-m-d', $match[0]);

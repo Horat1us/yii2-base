@@ -10,14 +10,14 @@ class UrlHelper
 {
     public static function append(string $url, array $params = []): string
     {
-        $parts = parse_url($url);
-        parse_str($parts['query'] ?? '', $existParams);
+        $parts = \parse_url($url);
+        \parse_str($parts['query'] ?? '', $existParams);
 
-        $mergedParams = array_merge($existParams, $params);
-        $parts['query'] = http_build_query($mergedParams);
+        $mergedParams = \array_merge($existParams, $params);
+        $parts['query'] = \http_build_query($mergedParams);
 
-        return function_exists('http_build_url')
-            ? http_build_url($parts)
+        return \function_exists('http_build_url')
+            ? \http_build_url($parts)
             : (
                 ($parts['scheme'] ?? 'http')
                 . '://' . ($parts['host'] ?? 'localhost')

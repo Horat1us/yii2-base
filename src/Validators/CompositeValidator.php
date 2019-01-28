@@ -64,11 +64,11 @@ class CompositeValidator extends Validator
     {
         if ($rule instanceof Validator) {
             return $rule;
-        } elseif (is_array($rule) && isset($rule[0]) && isset($rule[1])) {
-            if (!is_object($model)) {
+        } elseif (\is_array($rule) && isset($rule[0]) && isset($rule[1])) {
+            if (!\is_object($model)) {
                 $model = new base\Model(); // mock up context model
             }
-            return Validator::createValidator($rule[1], $model, $this->attributes, array_slice($rule, 2));
+            return Validator::createValidator($rule[1], $model, $this->attributes, \array_slice($rule, 2));
         } else {
             throw new base\InvalidConfigException(
                 'Invalid validation rule: a rule must be an array specifying validator type.'
@@ -86,8 +86,8 @@ class CompositeValidator extends Validator
      */
     private function validateInternal(&$model, &$attribute, &$validator, &$originalErrors, &$value, $target)
     {
-        $current = explode('[]', $target, 2);
-        if (count($current) > 1) {
+        $current = \explode('[]', $target, 2);
+        if (\count($current) > 1) {
             $items = ArrayHelper::getValue($value, $current[0]);
             if ($items) {
                 foreach ($items as $i => $item) {
@@ -115,7 +115,7 @@ class CompositeValidator extends Validator
                 }
                 if ($this->allowMessageFromRule) {
                     $name = "{$attribute}.{$target}";
-                    $name = preg_replace('/\.(\w+)/', '[\\1]', $name);
+                    $name = \preg_replace('/\.(\w+)/', '[\\1]', $name);
                     $model->addErrors([$name => $validationErrors]);
                 } else {
                     $this->addError($model, $attribute, $this->message, ['value' => $v]);

@@ -14,11 +14,11 @@ trait BootstrapMigrations
         console\Application $application,
         string $migrationNamespace
     ): void {
-        if (!array_key_exists('migrate', $application->controllerMap)) {
+        if (!\array_key_exists('migrate', $application->controllerMap)) {
             $application->controllerMap['migrate'] = [
                 'class' => console\controllers\MigrateController::class,
             ];
-        } elseif (is_string($application->controllerMap['migrate'])) {
+        } elseif (\is_string($application->controllerMap['migrate'])) {
             $application->controllerMap['migrate'] = [
                 'class' => $application->controllerMap['migrate'],
             ];
