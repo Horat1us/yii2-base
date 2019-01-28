@@ -14,7 +14,7 @@ class FileLoaderBehavior extends Behavior
     /** @var bool */
     public $multiple = false;
 
-    public function events()
+    public function events(): array
     {
         return [
             Model::EVENT_BEFORE_VALIDATE => 'load',

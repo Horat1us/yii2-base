@@ -21,7 +21,7 @@ trait ShoRecordTrait
     {
         $tableAlias = $tableAlias ?? static::tableName();
 
-        $tableAlias = preg_replace('/[^\w]/', '', $tableAlias);
+        $tableAlias = \preg_replace('/[^\w]/', '', $tableAlias);
 
         return "{{%$tableAlias}}.$field";
     }

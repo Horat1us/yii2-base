@@ -124,7 +124,7 @@ class LoaderBehavior extends Behavior
         parent::init();
         if (!empty($this->targetClass) && empty($this->attribute)) {
             /** @see ActiveRecord::tableName() */
-            $this->attribute = lcfirst(Inflector::camelize(call_user_func([$this->targetClass, 'tableName'])));
+            $this->attribute = \lcfirst(Inflector::camelize(\call_user_func([$this->targetClass, 'tableName'])));
         }
     }
 
@@ -136,10 +136,10 @@ class LoaderBehavior extends Behavior
     {
         $id = null;
 
-        if (is_string($this->id)) {
+        if (\is_string($this->id)) {
             $id = \Yii::$app->request->get($this->id);
-        } elseif (is_callable($this->id)) {
-            $id = call_user_func($this->id, $this);
+        } elseif (\is_callable($this->id)) {
+            $id = \call_user_func($this->id, $this);
         }
 
         if (empty($id)) {
@@ -158,8 +158,8 @@ class LoaderBehavior extends Behavior
 
     protected function inject(object $object): void
     {
-        if (is_callable($this->load)) {
-            call_user_func($this->load, $object);
+        if (\is_callable($this->load)) {
+            \call_user_func($this->load, $object);
             return;
         }
 
@@ -176,13 +176,13 @@ class LoaderBehavior extends Behavior
      */
     protected function query($id): ?object
     {
-        if (is_callable($this->query)) {
-            return call_user_func($this->query, $id);
+        if (\is_callable($this->query)) {
+            return \call_user_func($this->query, $id);
         }
 
-        $query = call_user_func([$this->targetClass, 'find']);
-        if (is_callable($this->queryFilter)) {
-            $query = call_user_func($this->queryFilter, $query, $id);
+        $query = \call_user_func([$this->targetClass, 'find']);
+        if (\is_callable($this->queryFilter)) {
+            $query = \call_user_func($this->queryFilter, $query, $id);
         } elseif (!empty($this->targetAttribute)) {
             $query->andWhere(['=', $this->targetAttribute, $id]);
         } else {
@@ -198,8 +198,8 @@ class LoaderBehavior extends Behavior
      */
     protected function notFound($id = null): void
     {
-        if (is_callable($this->notFoundCallback)) {
-            call_user_func($this->notFoundCallback, $id);
+        if (\is_callable($this->notFoundCallback)) {
+            \call_user_func($this->notFoundCallback, $id);
             return;
         }
 

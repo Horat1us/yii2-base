@@ -96,8 +96,8 @@ class LoaderValidator extends Validator
     protected function getQuery(): ActiveQuery
     {
         if ($this->targetQuery) {
-            if (is_callable($this->targetQuery)) {
-                return call_user_func($this->targetQuery);
+            if (\is_callable($this->targetQuery)) {
+                return \call_user_func($this->targetQuery);
             }
             return $this->targetQuery;
         }
@@ -105,6 +105,6 @@ class LoaderValidator extends Validator
         if (!$this->targetClass) {
             throw new InvalidConfigException("targetClass or targetQuery must be set");
         }
-        return call_user_func([$this->targetClass, 'find']);
+        return \call_user_func([$this->targetClass, 'find']);
     }
 }

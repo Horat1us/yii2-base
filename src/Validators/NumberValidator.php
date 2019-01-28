@@ -77,22 +77,22 @@ class NumberValidator extends Validator
     public function validateAttribute($model, $attribute)
     {
         $value = $model->$attribute;
-        if (is_array($value) || (is_object($value) && !method_exists($value, '__toString'))) {
+        if (\is_array($value) || (\is_object($value) && !\method_exists($value, '__toString'))) {
             $this->addError($model, $attribute, $this->message);
             return;
         }
         $pattern = $this->integerOnly ? $this->integerPattern : $this->numberPattern;
 
-        if (!preg_match($pattern, StringHelper::normalizeNumber($value))) {
+        if (!\preg_match($pattern, StringHelper::normalizeNumber($value))) {
             $this->addError($model, $attribute, $this->message);
         }
 
-        $min = is_callable($this->min) ? call_user_func($this->min) : $this->min;
+        $min = \is_callable($this->min) ? \call_user_func($this->min) : $this->min;
         if ($min !== null && $value < $min) {
             $this->addError($model, $attribute, $this->tooSmall, ['min' => $min]);
         }
 
-        $max = is_callable($this->max) ? call_user_func($this->max) : $this->max;
+        $max = \is_callable($this->max) ? \call_user_func($this->max) : $this->max;
         if ($max !== null && $value > $max) {
             $this->addError($model, $attribute, $this->tooBig, ['max' => $max]);
         }
@@ -103,18 +103,18 @@ class NumberValidator extends Validator
      */
     protected function validateValue($value)
     {
-        if (is_array($value) || is_object($value)) {
+        if (\is_array($value) || \is_object($value)) {
             return [Yii::t('yii', '{attribute} is invalid.'), []];
         }
         $pattern = $this->integerOnly ? $this->integerPattern : $this->numberPattern;
-        if (!preg_match($pattern, StringHelper::normalizeNumber($value))) {
+        if (!\preg_match($pattern, StringHelper::normalizeNumber($value))) {
             return [$this->message, []];
         } elseif ($this->min !== null
-            && $value < ($min = (is_callable($this->min) ? call_user_func($this->min) : $this->min))
+            && $value < ($min = (\is_callable($this->min) ? \call_user_func($this->min) : $this->min))
         ) {
             return [$this->tooSmall, ['min' => $min]];
         } elseif ($this->max !== null
-            && $value > ($max = (is_callable($this->max) ? call_user_func($this->max) : $this->max))
+            && $value > ($max = (\is_callable($this->max) ? \call_user_func($this->max) : $this->max))
         ) {
             return [$this->tooBig, ['max' => $max]];
         }

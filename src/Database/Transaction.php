@@ -36,12 +36,12 @@ class Transaction implements TransactionInterface
     public function call(callable $callable, ...$args)
     {
         if ($this->connection->transaction && $this->connection->transaction->isActive) {
-            return call_user_func_array($callable, $args);
+            return \call_user_func_array($callable, $args);
         }
 
         $transaction = $this->connection->beginTransaction();
         try {
-            $result = call_user_func_array($callable, $args);
+            $result = \call_user_func_array($callable, $args);
 
             $transaction->commit();
 

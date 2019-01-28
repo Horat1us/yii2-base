@@ -21,12 +21,12 @@ class ArrayHelper extends YiiArrayHelper
             $return = [$perms];
         } else {
             $return = [];
-            for ($i = count($items) - 1; $i >= 0; --$i) {
+            for ($i = \count($items) - 1; $i >= 0; --$i) {
                 $newItems = $items;
                 $newPerms = $perms;
-                list($foo) = array_splice($newItems, $i, 1);
-                array_unshift($newPerms, $foo);
-                $return = array_merge($return, static::permute($newItems, $newPerms));
+                list($foo) = \array_splice($newItems, $i, 1);
+                \array_unshift($newPerms, $foo);
+                $return = \array_merge($return, static::permute($newItems, $newPerms));
             }
         }
         return $return;
@@ -40,7 +40,7 @@ class ArrayHelper extends YiiArrayHelper
         foreach ($items as $key => $item) {
             $arguments = [$item];
             $hasTwoArguments && $arguments[] = $key;
-            if (!call_user_func($condition, ...$arguments)) {
+            if (!\call_user_func($condition, ...$arguments)) {
                 return false;
             }
         }
@@ -55,7 +55,7 @@ class ArrayHelper extends YiiArrayHelper
         foreach ($items as $key => $item) {
             $arguments = [$item];
             $hasTwoArguments && $arguments[] = $key;
-            if (call_user_func($condition, ...$arguments)) {
+            if (\call_user_func($condition, ...$arguments)) {
                 return true;
             }
         }

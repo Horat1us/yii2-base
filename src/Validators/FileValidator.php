@@ -46,7 +46,7 @@ class FileValidator extends \yii\validators\FileValidator
      */
     public function filterFiles(Model $model, string $attribute)
     {
-        return $model->{$attribute} = array_values(array_filter((array)$model->{$attribute}, function ($file) {
+        return $model->{$attribute} = \array_values(\array_filter((array)$model->{$attribute}, function ($file) {
             return $file instanceof UploadedFile && $file->error != UPLOAD_ERR_NO_FILE;
         }));
     }
@@ -59,7 +59,7 @@ class FileValidator extends \yii\validators\FileValidator
     public function validateFiles(Model $model, string $attribute): bool
     {
         $files = $model->$attribute;
-        if (!is_array($files) && !$files instanceof UploadedFile) {
+        if (!\is_array($files) && !$files instanceof UploadedFile) {
             $this->addError($model, $attribute, $this->uploadRequired);
             return false;
         }
@@ -80,15 +80,15 @@ class FileValidator extends \yii\validators\FileValidator
             return false;
         }
 
-        $maxFiles = is_callable($this->maxFiles)
-            ? call_user_func($this->maxFiles, $model, $attribute)
+        $maxFiles = \is_callable($this->maxFiles)
+            ? \call_user_func($this->maxFiles, $model, $attribute)
             : $this->maxFiles;
 
-        if (is_null($maxFiles)) {
+        if (\is_null($maxFiles)) {
             return true;
         }
 
-        if (count($files) <= $maxFiles) {
+        if (\count($files) <= $maxFiles) {
             return true;
         }
 
@@ -106,7 +106,7 @@ class FileValidator extends \yii\validators\FileValidator
     {
         $files = $model->{$attribute};
 
-        return array_reduce(
+        return \array_reduce(
             $files,
             function (bool $carry, UploadedFile $file) use ($model, $attribute) {
                 if (!$carry) {

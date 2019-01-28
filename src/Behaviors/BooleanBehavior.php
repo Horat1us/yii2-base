@@ -39,7 +39,7 @@ class BooleanBehavior extends Behavior
     public function process()
     {
         foreach ((array)$this->attributes as $attribute) {
-            if (is_null($this->owner->{$attribute})) {
+            if (\is_null($this->owner->{$attribute})) {
                 continue;
             }
 
@@ -55,11 +55,11 @@ class BooleanBehavior extends Behavior
      */
     protected function map($value)
     {
-        if (is_numeric($value)) {
+        if (\is_numeric($value)) {
             return (bool)$value;
         }
 
-        if (is_string($value)) {
+        if (\is_string($value)) {
             return $value === 'true';
         }
 
@@ -73,11 +73,11 @@ class BooleanBehavior extends Behavior
      */
     protected function makeReturnValue($value)
     {
-        if (!is_bool($value)) {
+        if (!\is_bool($value)) {
             return $value;
         }
 
-        if (!in_array($this->returnType, [static::RETURN_TYPE_BOOL, static::RETURN_TYPE_INT,])) {
+        if (!\in_array($this->returnType, [static::RETURN_TYPE_BOOL, static::RETURN_TYPE_INT,])) {
             throw new InvalidConfigException("Invalid return type {$this->returnType}");
         }
         return $this->returnType === static::RETURN_TYPE_BOOL ? $value : (int)$value;

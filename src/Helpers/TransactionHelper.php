@@ -44,7 +44,7 @@ class TransactionHelper
      */
     public static function forEach(callable $closure, array $array, ...$args)
     {
-        return array_map(
+        return \array_map(
             function ($item) use ($closure, $args) {
                 return static::within($closure, $item, ...$args);
             },

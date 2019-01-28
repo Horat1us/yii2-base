@@ -32,7 +32,7 @@ class NumberBehavior extends Behavior
     public function map()
     {
         foreach ((array)$this->attributes as $attribute) {
-            $this->owner->{$attribute} = preg_replace("/\D/", '', $this->owner->{$attribute});
+            $this->owner->{$attribute} = \preg_replace("/\D/", '', $this->owner->{$attribute});
         }
     }
 }
