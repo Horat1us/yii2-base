@@ -2,9 +2,14 @@
 
 namespace Horat1us\Yii\Interfaces;
 
-use yii\base\Model;
+use Horat1us\Yii\Validation;
 
-interface ModelExceptionInterface extends \Throwable
+/**
+ * Interface ModelExceptionInterface
+ * @package Horat1us\Yii\Interfaces
+ * @deprecated
+ * @see Validation\Failure
+ */
+interface ModelExceptionInterface extends Validation\Failure
 {
-    public function getModel(): Model;
 }
