@@ -18,7 +18,7 @@ abstract class AbstractTestCase extends TestCase
      * Create new application instance if it doesn't exist.
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (isset(\Yii::$app)) {
             return;
@@ -35,7 +35,7 @@ abstract class AbstractTestCase extends TestCase
      * Clear created application.
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         \Yii::$app = null;
         \Yii::$container = new Container();

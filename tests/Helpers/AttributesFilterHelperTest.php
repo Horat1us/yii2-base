@@ -3,7 +3,6 @@
 namespace Horat1us\Yii\Tests\Helpers;
 
 use Horat1us\Yii\Helpers\AttributesFilterHelper;
-use PHPUnit\Framework\Error\Error;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,9 +15,6 @@ class AttributesFilterHelperTest extends TestCase
 {
     const ATTRIBUTE = 'test';
 
-    /**
-     * @expectedException Error
-     */
     public function testInvalidFunction()
     {
         $attributes = [
@@ -27,7 +23,7 @@ class AttributesFilterHelperTest extends TestCase
         $filters = [
             static::ATTRIBUTE => 'invalidFunc',
         ];
-
+        $this->expectException(\Error::class);
         AttributesFilterHelper::apply($attributes, $filters);
     }
 

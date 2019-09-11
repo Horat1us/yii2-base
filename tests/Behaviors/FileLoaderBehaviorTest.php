@@ -9,7 +9,7 @@ use yii\web\UploadedFile;
 
 class FileLoaderBehaviorTest extends AbstractTestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $faker = Factory::create();
         $file = $faker->image();
@@ -32,7 +32,7 @@ class FileLoaderBehaviorTest extends AbstractTestCase
                 ],
             ],
         ];
-        return parent::setUp();
+        parent::setUp();
     }
 
     public function testLoadingSingleFile()

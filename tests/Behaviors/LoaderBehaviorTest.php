@@ -22,7 +22,7 @@ class LoaderBehaviorTest extends AbstractTestCase
     /** @var LoaderBehavior */
     protected $behavior;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -36,12 +36,10 @@ class LoaderBehaviorTest extends AbstractTestCase
         $this->behavior->attach($this->owner);
     }
 
-    /**
-     * @expectedException \yii\web\NotFoundHttpException
-     * @expectedExceptionMessage Resource id was not specified.
-     */
     public function testNotFound()
     {
+        $this->expectException(\yii\web\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Resource id was not specified.');
         $this->owner->trigger(Model::EVENT_BEFORE_VALIDATE);
     }
 }

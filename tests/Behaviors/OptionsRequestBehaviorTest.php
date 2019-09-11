@@ -16,7 +16,7 @@ class OptionsRequestBehaviorTest extends AbstractTestCase
     /** @var OptionsRequestBehavior */
     protected $behavior;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->behavior = new OptionsRequestBehavior([
@@ -39,12 +39,10 @@ class OptionsRequestBehaviorTest extends AbstractTestCase
         ]);
     }
 
-    /**
-     * @expectedException \yii\base\ExitException
-     */
     public function testExit(): void
     {
         $this->behavior->request->method = 'OPTIONS';
+        $this->expectException(\yii\base\ExitException::class);
         try {
             $this->behavior->check();
         } catch (ExitException $exception) {
