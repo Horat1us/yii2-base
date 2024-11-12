@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  */
 class AttributesFilterHelperTest extends TestCase
 {
-    const ATTRIBUTE = 'test';
+    private const ATTRIBUTE = 'test';
 
     public function testInvalidFunction()
     {

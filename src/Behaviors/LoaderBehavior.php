@@ -5,10 +5,8 @@ namespace Horat1us\Yii\Behaviors;
 use yii\base\Behavior;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
-
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-
 use yii\helpers\Inflector;
 use yii\web\NotFoundHttpException;
 

@@ -109,11 +109,13 @@ class NumberValidator extends Validator
         $pattern = $this->integerOnly ? $this->integerPattern : $this->numberPattern;
         if (!preg_match($pattern, StringHelper::normalizeNumber($value))) {
             return [$this->message, []];
-        } elseif ($this->min !== null
+        } elseif (
+            $this->min !== null
             && $value < ($min = (is_callable($this->min) ? call_user_func($this->min) : $this->min))
         ) {
             return [$this->tooSmall, ['min' => $min]];
-        } elseif ($this->max !== null
+        } elseif (
+            $this->max !== null
             && $value > ($max = (is_callable($this->max) ? call_user_func($this->max) : $this->max))
         ) {
             return [$this->tooBig, ['max' => $max]];

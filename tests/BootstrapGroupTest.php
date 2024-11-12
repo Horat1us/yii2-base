@@ -43,7 +43,7 @@ class BootstrapGroupTest extends TestCase
         $app = $this->createMock(console\Application::class);
         $group = new BootstrapGroup([
             'items' => [
-                new \stdClass,
+                new \stdClass(),
             ],
         ]);
 

@@ -3,7 +3,6 @@
 namespace Horat1us\Yii\Database;
 
 use Horat1us\Yii\Interfaces\TransactionInterface;
-
 use yii\db\Connection;
 
 /**
