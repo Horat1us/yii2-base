@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Horat1us\Yii\Interfaces;
 
 /**

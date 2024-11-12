@@ -8,7 +8,6 @@ namespace Horat1us\Yii\Helpers;
  */
 class TransactionHelper
 {
-
     /**
      * @param callable $closure
      * @param array ...$args

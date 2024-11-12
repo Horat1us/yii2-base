@@ -12,8 +12,8 @@ use yii\db\ActiveRecord;
  */
 class BooleanBehavior extends Behavior
 {
-    const RETURN_TYPE_INT = 'int';
-    const RETURN_TYPE_BOOL = 'bool';
+    public const RETURN_TYPE_INT = 'int';
+    public const RETURN_TYPE_BOOL = 'bool';
 
     /** @var  string|string[] */
     public $attributes;

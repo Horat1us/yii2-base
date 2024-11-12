@@ -3,7 +3,6 @@
 namespace Horat1us\Yii\Console;
 
 use Horat1us\Yii\Interfaces\ModelExceptionInterface;
-
 use yii\helpers\Console;
 
 class ErrorHandler extends \yii\console\ErrorHandler

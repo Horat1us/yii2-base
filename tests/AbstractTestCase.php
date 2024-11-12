@@ -2,7 +2,7 @@
 
 namespace Horat1us\Yii\Tests;
 
-use \PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 use yii\di\Container;
 use yii\web\Application;
 

@@ -17,7 +17,7 @@ trait ShoRecordTrait
      * @param string|null $tableAlias
      * @return string
      */
-    public static function fieldName(string $field, string $tableAlias = null) :string
+    public static function fieldName(string $field, string $tableAlias = null): string
     {
         $tableAlias = $tableAlias ?? static::tableName();
 
