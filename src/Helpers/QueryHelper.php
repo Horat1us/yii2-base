@@ -43,7 +43,7 @@ class QueryHelper
      * @param string|null $else
      * @return string
      */
-    public static function caseWhen(array $cases, string $value = '', string $else = null): string
+    public static function caseWhen(array $cases, string $value = '', ?string $else = null): string
     {
         $command = "CASE {$value}";
 

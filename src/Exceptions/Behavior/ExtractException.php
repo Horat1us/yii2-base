@@ -21,7 +21,7 @@ class ExtractException extends base\InvalidConfigException
         base\Behavior $behavior,
         string $targetClass,
         int $code = 0,
-        Throwable $previous = null
+        ?Throwable $previous = null
     ) {
         $message = get_class($behavior) . " can be applied only to {$targetClass}";
         parent::__construct($message, $code, $previous);
