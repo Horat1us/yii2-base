@@ -37,6 +37,7 @@ abstract class AbstractTestCase extends TestCase
      */
     public function tearDown(): void
     {
+        \Yii::$app?->getErrorHandler()->unregister();
         \Yii::$app = null;
         \Yii::$container = new Container();
         $_FILES = [];

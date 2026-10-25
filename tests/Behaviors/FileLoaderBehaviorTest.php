@@ -9,10 +9,13 @@ use yii\web\UploadedFile;
 
 class FileLoaderBehaviorTest extends AbstractTestCase
 {
+    private string $file;
+
     public function setUp(): void
     {
         $faker = Factory::create();
-        $file = $faker->image();
+        $file = $this->file = tempnam(sys_get_temp_dir(), 'yii2-base-test');
+        file_put_contents($file, random_bytes(64));
         $_FILES = [
             'FileLoaderBehaviorMock' => [
                 'name' => [
@@ -33,6 +36,12 @@ class FileLoaderBehaviorTest extends AbstractTestCase
             ],
         ];
         parent::setUp();
+    }
+
+    public function tearDown(): void
+    {
+        unlink($this->file);
+        parent::tearDown();
     }
 
     public function testLoadingSingleFile()

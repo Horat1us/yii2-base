@@ -18,7 +18,7 @@ class BootstrapGroupTest extends TestCase
     public function testRunningItems(): void
     {
         /** @var console\Application $app */
-        $app = $this->createMock(console\Application::class);
+        $app = $this->createStub(console\Application::class);
         $group = new BootstrapGroup();
 
         $child = $this->createMock(BootstrapGroup::class);
@@ -40,7 +40,7 @@ class BootstrapGroupTest extends TestCase
     public function testInvalidReference(): void
     {
         /** @var console\Application $app */
-        $app = $this->createMock(console\Application::class);
+        $app = $this->createStub(console\Application::class);
         $group = new BootstrapGroup([
             'items' => [
                 new \stdClass(),
